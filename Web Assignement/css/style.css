@@ -6,11 +6,12 @@
     font-family: 'Poppins', sans-serif;
 }
 body{
-    background-color: rgb(158, 94, 106);;
+    background-color: rgb(158, 94, 106);
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     overflow: hidden;
+    color: white;
 }
 .wrapper{
     display: flex;
@@ -32,7 +33,7 @@ body{
 }
 .nav-logo p{
     color: white;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 600;
 }
 .nav-menu ul{
@@ -43,10 +44,10 @@ body{
 }
 .nav-menu ul li .link{
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 400;
     color: #fff;
     padding-bottom: 15px;
-    margin: 0 25px;
+    margin: 0 20px;
 }
 .link:hover, .active{
     border-bottom: 2px solid #fff;
@@ -183,58 +184,57 @@ header{
 .two label a:hover{
     text-decoration: underline;
 }
-@media only screen and (max-width: 786px){
-    .nav-button{
-        display: none;
-    }
-    .nav-menu.responsive{
-        top: 100px;
-    }
-    .nav-menu{
-        position: absolute;
-        top: -800px;
-        display: flex;
-        justify-content: center;
-        background: rgba(255, 255, 255, 0.2);
-        width: 100%;
-        height: 90vh;
-        backdrop-filter: blur(20px);
-        transition: .3s;
-    }
-    .nav-menu ul{
-        flex-direction: column;
-        text-align: center;
-    }
-    .nav-menu-btn{
-        display: block;
-    }
-    .nav-menu-btn i{
-        font-size: 25px;
-        color: #fff;
-        padding: 10px;
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 50%;
-        cursor: pointer;
-        transition: .3s;
-    }
-    .nav-menu-btn i:hover{
-        background: rgba(255, 255, 255, 0.15);
-    }
+
+
+
+
+#contact .contact{
+    flex-direction: column;
+    max-width: 1200px;
+    min-height: 100px;
+    margin: 0 auto;
+    padding: 100px 0;
 }
-@media only screen and (max-width: 540px) {
-    .wrapper{
-        min-height: 100vh;
-    }
-    .form-box{
-        width: 100%;
-        height: 500px;
-    }
-    .register-container, .login-container{
-        width: 100%;
-        padding: 0 20px;
-    }
-    .register-container .two-forms{
-        flex-direction: column;
-        gap: 0;
-    }
+#contact .items{
+    width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	margin: 0;
+}
+#contact .contact-item{
+    width: 80%;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    margin: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0px 0px 18px 0px #0000002c;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+#contact .contact-item .icon{
+    height: 40px;
+	width: 40px;
+    margin-bottom: 10px;
+}
+
+#contact .contact-info {
+    color: white;
+    text-align: center;
+}
+
+#contact .contact-info h2{
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: white;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+#contact .linkedin-link{
+    text-decoration: none;
+    color: white;
 }
