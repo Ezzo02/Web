@@ -13,16 +13,16 @@
         </div>
         <div class="nav-menu" id="navMenu">
             <ul>
-                <li><a href="#" class="link">Home</a></li>
+                <li><a href="../html/login.html" class="link">Home</a></li>
                 <li><a href="#" class="link">Personal Site</a></li>
                 <li><a href="#" class="link">Gallery</a></li>
                 <li><a href="#" class="link">CV</a></li>
-                <li><a href="#" class="link active">Contact Me</a></li>
+                <li><a href="contact.html" class="link active">Contact Me</a></li>
             </ul>
         </div>
         <div class="nav-button">
-            <button class="btn white-btn" id="loginBtn" onclick="login()">Sign In</button>
-            <button class="btn" id="registerBtn" onclick="register()">Sign Up</button>
+            <button class="btn white-btn" id="loginBtn" onclick="redirectToLogin()">Sign In</button>
+            <button class="btn" id="registerBtn" onclick="redirectToRegister()">Sign Up</button>    
         </div>
         <div class="nav-menu-btn">
             <i class="bx bx-menu" onclick="myMenuFunction()"></i>
@@ -66,6 +66,15 @@
         </div>
     </section>
 
+    <script>
+        function redirectToLogin() {
+            window.location.href = 'login.html#login';
+        }
+    
+        function redirectToRegister() {
+            window.location.href = 'login.html#register';
+        }
+    </script>
     
 </body>
 </html>
