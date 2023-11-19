@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../css/style.css">
     <title>Registration</title>
 </head>
-<body class="login-body">
+<body class="register">
  <div class="wrapper">
     <div class="form-box">
         <form id="registrationForm" method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
