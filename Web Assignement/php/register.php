@@ -16,10 +16,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $gender = isset($_POST['gender']) ? $_POST['gender'] : '';
     $dob = isset($_POST['dob']) ? $_POST['dob'] : '';      
 
-    if (empty($firstname) || empty($lastname) || empty($username) || empty($email) || empty($password) || empty($gender) || empty($dob)) {
+    $csvFile = 'users.csv';
+    $existingUsers = [];
+
+    $file = fopen($csvFile, 'r');
+    
+    while (($row = fgetcsv($file)) !== false) {
+        if ($row[2] === $username) {
+            $existingUsers = $row;
+            break;
+        }
+        if ($row[3] === $username) {
+            $existingUsers = $row;
+            break;
+        }
+    }
+
+    fclose($file);
+
+    if (!empty($existingUsers)) {
+        echo "Username/Email already exists. Please choose a different username/email.";
+
+        list($existingFirstname, $existingLastname, $existingEmail, $existingPassword, $existingGender, $existingDob) = $existingUsers;
+
+        $firstname = '';
+        $lastname = '';
+        $email = '';
+        $password = '';
+        $gender = '';
+        $dob = '';
+    } elseif (empty($firstname) || empty($lastname) || empty($username) || empty($email) || empty($password) || empty($gender) || empty($dob)) {
         echo "All fields are required. Please fill out the complete form.";
     } else {
-        $csvFile = 'users.csv';
         $file = fopen($csvFile, 'a');
         fputcsv($file, [$firstname, $lastname, $username, $email, $password, $gender, $dob]);
         fclose($file);
@@ -28,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 
 
 <!DOCTYPE html>
