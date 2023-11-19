@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($row[2] === $username && $row[4] === $password) {
             fclose($file);
             $_SESSION['username'] = $username;
-            header("Location: ../php/contact.php");
+            header("Location: ../php/home.php");
             exit();
         }
     }
@@ -33,7 +33,7 @@ session_destroy();
     <link rel="stylesheet" href="../css/style.css">
     <title>Login</title>
 </head>
-<body class="login-body">
+<body class="login">
  <div class="wrapper">
     <div class="form-box">
         <form action="login.php" method="POST">
