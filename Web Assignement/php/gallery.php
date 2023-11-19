@@ -1,7 +1,7 @@
 <?php
     session_start();
     if (!isset($_SESSION["username"])){
-        header("location:login.php");
+        header("location:../index.php");
     }
     $jsonData = file_get_contents('gallery.json');
 
@@ -61,7 +61,7 @@
     </div>
     <script>
         function redirectToLogin() {
-            window.location.href = '../php/login.php';
+            window.location.href = '../index.php';
         }
     </script>
 </body>

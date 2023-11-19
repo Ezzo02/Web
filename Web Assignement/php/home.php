@@ -1,7 +1,7 @@
 <?php
     session_start();
     if (!isset($_SESSION["username"])){
-        header("location:login.php");
+        header("location:../index.php");
     }
 ?>
 <!DOCTYPE html>
@@ -46,7 +46,7 @@
 
     <script>
         function redirectToLogin() {
-            window.location.href = '../php/login.php';
+            window.location.href = '../index.php';
         }
     </script>
 </body>

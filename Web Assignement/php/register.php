@@ -4,6 +4,8 @@ $lastname = '';
 $username = '';
 $email = '';
 $password = '';
+$gender = ''; 
+$dob = '';  
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $firstname = isset($_POST['firstname']) ? $_POST['firstname'] : '';
@@ -11,15 +13,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = isset($_POST['username']) ? $_POST['username'] : '';
     $email = isset($_POST['email']) ? $_POST['email'] : '';
     $password = isset($_POST['password']) ? $_POST['password'] : '';
+    $gender = isset($_POST['gender']) ? $_POST['gender'] : '';
+    $dob = isset($_POST['dob']) ? $_POST['dob'] : '';      
 
-    if (empty($firstname) || empty($lastname) || empty($username) || empty($email) || empty($password)) {
+    if (empty($firstname) || empty($lastname) || empty($username) || empty($email) || empty($password) || empty($gender) || empty($dob)) {
         echo "All fields are required. Please fill out the complete form.";
     } else {
         $csvFile = 'users.csv';
         $file = fopen($csvFile, 'a');
-        fputcsv($file, [$firstname, $lastname, $username, $email, $password]);
+        fputcsv($file, [$firstname, $lastname, $username, $email, $password, $gender, $dob]);
         fclose($file);
-        header("Location: ../php/login.php");
+        header("Location: ../index.php");
         exit();
     }
 }
@@ -41,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="form-box">
         <form id="registrationForm" method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
             <div class="top">
-                <span>Have an account? <a href="login.php">Login</a></span>
+                <span>Have an account? <a href="../index.php">Login</a></span>
                 <header>Sign Up</header>
             </div>
             <div class="two-forms">
@@ -67,6 +71,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <i class="bx bx-lock-alt"></i>
             </div>
             <div class="input-box">
+                <select name="gender" class="input-field" placeholder="Gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+                <i class='bx bx-male-female'></i>
+            </div>
+            <div class="input-box">
+                <input type="date" name="dob" class="input-field" placeholder="Date of Birth" value="<?php echo $dob; ?>">
+                <i class='bx bxs-calendar'></i>
+            </div>
+            <div class="input-box">
                 <input type="submit" class="submit" value="Register">
             </div>
             <div class="two-col">
@@ -83,18 +99,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </div>   
 
-
-
-<script>
-    document.getElementById('loginBtn').addEventListener('click', function() {
-        window.location.href = 'login.php';
-    });
-</script>
-
-<script>
-    document.getElementById('registerBtn').addEventListener('click', function() {
-        window.location.href = 'register.php';
-    });
-</script>
 </body>
 </html>
