@@ -1,27 +1,23 @@
 <?php
 $firstname = '';
 $lastname = '';
+$username = '';
 $email = '';
 $password = '';
 
-// Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Retrieve form data
     $firstname = isset($_POST['firstname']) ? $_POST['firstname'] : '';
     $lastname = isset($_POST['lastname']) ? $_POST['lastname'] : '';
+    $username = isset($_POST['username']) ? $_POST['username'] : '';
     $email = isset($_POST['email']) ? $_POST['email'] : '';
     $password = isset($_POST['password']) ? $_POST['password'] : '';
 
-    if (empty($firstname) || empty($lastname) || empty($email) || empty($password)) {
+    if (empty($firstname) || empty($lastname) || empty($username) || empty($email) || empty($password)) {
         echo "All fields are required. Please fill out the complete form.";
-        // You might want to redirect the user back to the registration form or display an error message
-        // header("Location: ../php/register.php");
-        // exit();
     } else {
-        // Write data to CSV file
         $csvFile = 'users.csv';
-        $file = fopen($csvFile, 'a'); // 'a' mode to append to the file
-        fputcsv($file, [$firstname, $lastname, $email, $password]);
+        $file = fopen($csvFile, 'a');
+        fputcsv($file, [$firstname, $lastname, $username, $email, $password]);
         fclose($file);
         header("Location: ../php/login.php");
         exit();
@@ -42,24 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body class="login-body">
  <div class="wrapper">
-    <nav class="nav">
-        <div class="nav-logo">
-            <p>Sara</p>
-        </div>
-        <div class="nav-menu" id="navMenu">
-            <ul>
-                <li><a href="login.html" class="link active">Home</a></li>
-                <li><a href="#" class="link">Personal Site</a></li>
-                <li><a href="#" class="link">Gallery</a></li>
-                <li><a href="#" class="link">CV</a></li>
-                <li><a href="../php/contact.html" class="link">Contact Me</a></li>
-            </ul>
-        </div>
-        <div class="nav-button">
-            <button class="btn white-btn" id="loginBtn">Sign In</button>
-            <button class="btn" id="registerBtn">Sign Up</button>
-        </div>
-    </nav>
     <div class="form-box">
         <form id="registrationForm" method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
             <div class="top">
@@ -75,6 +53,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="text" name="lastname" class="input-field" placeholder="Lastname" value="<?php echo $lastname; ?>">
                     <i class="bx bx-user"></i>
                 </div>
+            </div>
+            <div class="input-box">
+                <input type="text" name="username" class="input-field" placeholder="Username" value="<?php echo $username; ?>">
+                <i class="bx bx-user"></i>
             </div>
             <div class="input-box">
                 <input type="text" name="email" class="input-field" placeholder="Email" value="<?php echo $email; ?>">

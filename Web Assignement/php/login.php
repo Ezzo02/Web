@@ -1,32 +1,26 @@
 <?php
-// Check if the form is submitted
+session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Retrieve form data
-    $usernameOrEmail = isset($_POST['usernameOrEmail']) ? $_POST['usernameOrEmail'] : '';
+    $username = isset($_POST['username']) ? $_POST['username'] : '';
     $password = isset($_POST['password']) ? $_POST['password'] : '';
 
-    // Validate and sanitize data if needed
-
-    // Read user data from the CSV file
     $csvFile = 'users.csv';
     $file = fopen($csvFile, 'r');
     
-    // Loop through each row in the CSV file
     while (($row = fgetcsv($file)) !== false) {
-        // Check if the entered credentials match any user in the file
-        if (($row[0] === $usernameOrEmail || $row[2] === $usernameOrEmail) && $row[3] === $password) {
+        if ($row[2] === $username && $row[4] === $password) {
             fclose($file);
-            // Redirect the user to a success page or perform other actions
-            header("Location: ../success.php");
+            $_SESSION['username'] = $username;
+            header("Location: ../php/contact.php");
             exit();
         }
     }
 
     fclose($file);
-
-    // If no matching user is found, display an error message
     echo "Invalid email or password. Please try again.";
 }
+session_unset(); 
+session_destroy();
 ?>
 
 <!DOCTYPE html>
@@ -41,24 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body class="login-body">
  <div class="wrapper">
-    <nav class="nav">
-        <div class="nav-logo">
-            <p>Sara</p>
-        </div>
-        <div class="nav-menu" id="navMenu">
-            <ul>
-                <li><a href="login.html" class="link active">Home</a></li>
-                <li><a href="#" class="link">Personal Site</a></li>
-                <li><a href="#" class="link">Gallery</a></li>
-                <li><a href="#" class="link">CV</a></li>
-                <li><a href="../contact.html" class="link">Contact Me</a></li>
-            </ul>
-        </div>
-        <div class="nav-button">
-            <button class="btn white-btn" id="loginBtn">Sign In</button>
-            <button class="btn" id="registerBtn">Sign Up</button>
-        </div>
-    </nav>
     <div class="form-box">
         <form action="login.php" method="POST">
             <div class="top">
@@ -66,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <header>Login</header>
             </div>
             <div class="input-box">
-                <input type="text" name="email" class="input-field" placeholder="Email">
+                <input type="text" name="username" class="input-field" placeholder="Username">
                 <i class="bx bx-user"></i>
             </div>
             <div class="input-box">
