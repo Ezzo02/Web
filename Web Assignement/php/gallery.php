@@ -3,6 +3,13 @@
     if (!isset($_SESSION["username"])){
         header("location:login.php");
     }
+    $jsonData = file_get_contents('gallery.json');
+
+    $images = json_decode($jsonData, true);
+
+    if ($images === null) {
+        die('Error decoding JSON file');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,8 +26,8 @@
         </div>
         <div class="nav-menu" id="navMenu">
             <ul>
-                <li><a href="home.php" class="link active">Home</a></li>
-                <li><a href="#" class="link">Gallery</a></li>
+                <li><a href="../php/home.php" class="link">Home</a></li>
+                <li><a href="gallery.php" class="link active">Gallery</a></li>
                 <li><a href="../php/cv.php" class="link">CV</a></li>
                 <li><a href="../php/contact.php" class="link">Contact Me</a></li>
             </ul>
@@ -33,27 +40,25 @@
         </div>
     </nav>
     
-    <h1>Gallery</h1>
-    <div class="body">
-        <div class="box">
-            <div class="picture">
-                <a href="picture1.html"><img src="images/image1.jpg" alt="Image 1"></a>
-            </div>
-        </div>
-    
-        <div class="box">
-            <div class="picture">
-                <a href="picture2.html"><img src="images/image2.jpg" alt="Image 2"></a>
-             </div>
-        </div>
-    
-        <div class="box">
-            <div class="picture">
-                <a href="picture3.html"><img src="images/image3.jpg" alt="Image 3"></a>
-            </div>
-        </div>
-    </div>
+    <div class="galleryinfo">
 
+        <?php if (!empty($images)): ?>
+        <?php foreach ($images as $image): ?>
+            <a href="#<?php echo $image['id']; ?>" class="linkgallery">
+            <div class="containergallery">
+                <img src="<?php echo $image['src']; ?>" alt="<?php echo $image['alt']; ?>" class="my-img-ga" />
+            </div>
+            </a>
+
+            <div class="lightboxga" id="<?php echo $image['id']; ?>">
+            <a href="#" class="close-button">&times;</a>
+            <img src="<?php echo $image['src']; ?>" alt="<?php echo $image['alt']; ?>" />
+            </div>
+        <?php endforeach; ?>
+        <?php else: ?>
+        <p>No images found.</p>
+        <?php endif; ?>
+    </div>
     <script>
         function redirectToLogin() {
             window.location.href = '../php/login.php';
